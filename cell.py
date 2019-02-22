@@ -32,6 +32,7 @@ class Cell:
         self.hasWallSouth = False
         self.hasWallWest = False
         self.hasBeenVisited = False
+        self.hasBeenFilled = False
         self.floodFillValue = -1
 
     """Getters"""
