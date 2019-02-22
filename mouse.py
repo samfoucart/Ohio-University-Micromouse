@@ -17,9 +17,9 @@ import API
 class Mouse:
 
     def __init__(self):
-        xPosition = 0
-        yPosition = 0
-        direction = "north"
+        self.xPosition = 0
+        self.yPosition = 0
+        self.mouseDirection = "north"
 
     def getXPosition(self):
         return self.xPosition
@@ -28,7 +28,7 @@ class Mouse:
         return self.yPosition
 
     def getDirection(self):
-        return self.direction
+        return self.mouseDirection
 
     def setXPosition(self, x):
         self.xPosition = x
@@ -37,7 +37,27 @@ class Mouse:
         self.yPosition = y
 
     def setDirection(self, entry):
-        self.direction = entry
+        self.mouseDirection = entry
 
-    def moveForward(self):
-        print("xxx")
+    def moveForward(self, maze):
+        if (maze.getCell(self.xPosition, self.yPosition)).getWallDirection(self.mouseDirection) == True:
+            return
+        elif self.mouseDirection == "north":
+            self.yPosition += 1
+            API.moveForward()
+        elif self.mouseDirection == "east":
+            self.xPosition += 1
+            API.moveForward()
+        elif self.mouseDirection == "south":
+            self.yPosition -= 1
+            API.moveForward()
+        elif self.mouseDirection == "west":
+            self.xPosition -= 1
+            API.moveForward()
+        else:
+            return
+
+    def senseWalls(self, maze):
+        return
+            
+        

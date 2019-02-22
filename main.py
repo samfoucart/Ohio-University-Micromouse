@@ -1,5 +1,5 @@
 #############################################################
-# @file     maze.py
+# @file     main.py
 # @date     February 2019
 # @author   Ohio University IEEE
 #
@@ -9,14 +9,19 @@
 import API
 import sys
 import maze
+import mouse
 
 def log(string):
     sys.stderr.write("{}\n".format(string))
 
 def main():
     log("hello")
-    myMaze = maze.Maze()
-    myMaze.loadPerimiter()
+    OUMaze = maze.Maze()
+    OUMaze.loadPerimiter()
+    OUMouse = mouse.Mouse()
+    while(True):
+        OUMouse.moveForward(OUMaze)
+
 
 if __name__ == "__main__":
     main()

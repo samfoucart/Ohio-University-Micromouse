@@ -48,6 +48,18 @@ class Cell:
     def getWallWest(self):
         return self.hasWallWest
 
+    def getWallDirection(self, direction):
+        if direction == "north":
+            return self.hasWallNorth
+        elif direction == "east":
+            return self.hasWallEast
+        elif direction == "south":
+            return self.hasWallSouth
+        elif direction == "west":
+            return self.hasWallWest
+        else:
+            return
+
     def getBeenVisited(self):
         return self.hasBeenVisited
 

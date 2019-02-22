@@ -67,12 +67,10 @@ class Maze:
         @param y the y coordinate of the cell
     """
     def getCell(self, x, y):
-        return self.data[self.getUnparsedCoordinate(x,y)]
+        return self.data[self.getUnparsedCoordinate(x, y)]
     
-    def getCell(self, unParsedCoordinate):
-        return self.data[unParsedCoordinate]
-
-        
+    """
+    """
     def loadPerimiter(self):
         for i in range(0,16):
             for j in range(0,16):
