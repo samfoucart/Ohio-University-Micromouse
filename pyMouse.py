@@ -14,8 +14,9 @@ def log(string):
     sys.stderr.write("{}\n".format(string))
 
 def main():
-    mainMaze = maze.Maze
-    mainMaze.loadPerimiter
+    log("hello")
+    myMaze = maze.Maze()
+    myMaze.loadPerimiter()
 
 if __name__ == "__main__":
     main()
