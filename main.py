@@ -9,7 +9,6 @@
 import API
 import sys
 import maze
-import mouse
 
 def log(string):
     sys.stderr.write("{}\n".format(string))
