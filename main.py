@@ -19,7 +19,10 @@ def main():
     OUMaze = maze.Maze()
     OUMaze.loadPerimiter()
     while(True):
+        sys.stderr.write("Position")
+        OUMaze.mouseScanWalls()
         OUMaze.mouseMoveForward()
+        
 
 
 if __name__ == "__main__":

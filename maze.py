@@ -52,7 +52,7 @@ class Maze:
         @return an integer value of the X coordinate
     """
     def parseX(self, unParsedCoordinate):
-        return (unParsedCoordinate - (unParsedCoordinate % 16)) / 16
+        return unParsedCoordinate % 16
 
     """ parseY This method converts the major row index of the 
         array into a Y coordinate
@@ -62,7 +62,7 @@ class Maze:
         @return an integer value of the Y coordinate
     """
     def parseY(self, unParsedCoordinate):
-        return unParsedCoordinate % 16
+        return int((unParsedCoordinate - (unParsedCoordinate % 16)) / 16)
 
     """ getCell This method returns a cell given
         the (x,y) coordinates
@@ -147,8 +147,12 @@ class Maze:
             self.data[self.mousePosition].setWallWest(API.wallLeft())
             self.data[self.mousePosition].setWallNorth(API.wallFront())
             self.data[self.mousePosition].setWallEast(API.wallRight())
-            #API.setWall(parseX(self.mousePosition), parseY(self.mousePosition), "w")
-            #API.setWall(parseX(self.mousePosition), parseY(self.mousePosition), "w")
+            if API.wallLeft() == True:
+                API.setWall((self.parseX(self.mousePosition)), (self.parseY(self.mousePosition)), "w")
+            if API.wallFront() == True:
+                API.setWall((self.parseX(self.mousePosition)), (self.parseY(self.mousePosition)), "n")
+            if API.wallRight() == True:
+                API.setWall((self.parseX(self.mousePosition)), (self.parseY(self.mousePosition)), "e")
 
 
 
