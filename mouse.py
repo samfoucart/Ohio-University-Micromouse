@@ -59,5 +59,7 @@ class Mouse:
 
     def senseWalls(self, maze):
         return
+        
+        
             
         

@@ -16,19 +16,23 @@ import cell
     cell objects which are imported from cell.py
 """
 
-class Maze:
-    """ @class Maze
+""" @class Maze
         This class is a container of Cells
-    """
+"""
+class Maze:
 
+    """ Constructor
+        @see loadPerimeter
+    """
     def __init__(self):
         self.data = []
         for i in range(0,256):
             self.data.append(cell.Cell())
 
-    
+        self.mousePosition = 0
+        self.mouseDirection = "north"
 
-    
+
     """ getUnparsedCoordinate This method returns a integer that can be parsed to 
         determine the x and y coordinates of a cell
 
@@ -68,14 +72,18 @@ class Maze:
     """
     def getCell(self, x, y):
         return self.data[self.getUnparsedCoordinate(x, y)]
+
     
-    """
+    """ This function sets the outer walls of a 16x16 maze
+        It should be called before anything else, but is not included in the
+        constructor for added freedom.
     """
     def loadPerimiter(self):
         for i in range(0,16):
             for j in range(0,16):
                 if i == 0:
                     if j == 0:
+                        """ This calls the setWall functions from cell.py """
                         self.data[(i*16)+j].setWallSouth(True)
                         self.data[(i*16)+j].setWallWest(True)
                         API.setWall(i, j, "s")
@@ -111,4 +119,37 @@ class Maze:
                 if j == 15 and (i != 0 or i != 15):
                     self.data[(i*16)+j].setWallNorth(True)
                     API.setWall(i, j, "n")
+
+    """ This function moves the mouse forward and assumes
+        that the mouse has already scanned for walls.
+    """
+    def mouseMoveForward(self):
+        if API.wallFront() == True:
+            """ If the cell where the mouse is"""
+            return
+        elif self.mouseDirection == "north":
+            self.mousePosition += 16
+            API.moveForward()
+        elif self.mouseDirection == "east":
+            self.mousePosition += 1
+            API.moveForward()
+        elif self.mouseDirection == "south":
+            self.mousePosition -= 16
+            API.moveForward()
+        elif self.mouseDirection == "west":
+            self.mousePosition -= 1
+            API.moveForward()
+        else:
+            return
+
+    def mouseScanWalls(self):
+        if self.mouseDirection == "north":
+            self.data[self.mousePosition].setWallWest(API.wallLeft())
+            self.data[self.mousePosition].setWallNorth(API.wallFront())
+            self.data[self.mousePosition].setWallEast(API.wallRight())
+            #API.setWall(parseX(self.mousePosition), parseY(self.mousePosition), "w")
+            #API.setWall(parseX(self.mousePosition), parseY(self.mousePosition), "w")
+
+
+
   

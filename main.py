@@ -18,9 +18,8 @@ def main():
     log("hello")
     OUMaze = maze.Maze()
     OUMaze.loadPerimiter()
-    OUMouse = mouse.Mouse()
     while(True):
-        OUMouse.moveForward(OUMaze)
+        OUMaze.mouseMoveForward()
 
 
 if __name__ == "__main__":
