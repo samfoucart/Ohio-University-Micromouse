@@ -142,6 +142,9 @@ class Maze:
         else:
             return
 
+    """ This function senses the walls adjacent to the mouse.
+        It currently does not add wall data to neighboring cells.
+    """
     def mouseScanWalls(self):
         if self.mouseDirection == "north":
             self.data[self.mousePosition].setWallWest(API.wallLeft())
@@ -153,6 +156,71 @@ class Maze:
                 API.setWall((self.parseX(self.mousePosition)), (self.parseY(self.mousePosition)), "n")
             if API.wallRight() == True:
                 API.setWall((self.parseX(self.mousePosition)), (self.parseY(self.mousePosition)), "e")
+        if self.mouseDirection == "east":
+            self.data[self.mousePosition].setWallNorth(API.wallLeft())
+            self.data[self.mousePosition].setWallEast(API.wallFront())
+            self.data[self.mousePosition].setWallSouth(API.wallRight())
+            if API.wallLeft() == True:
+                API.setWall((self.parseX(self.mousePosition)), (self.parseY(self.mousePosition)), "n")
+            if API.wallFront() == True:
+                API.setWall((self.parseX(self.mousePosition)), (self.parseY(self.mousePosition)), "e")
+            if API.wallRight() == True:
+                API.setWall((self.parseX(self.mousePosition)), (self.parseY(self.mousePosition)), "s")
+        if self.mouseDirection == "south":
+            self.data[self.mousePosition].setWallEast(API.wallLeft())
+            self.data[self.mousePosition].setWallSouth(API.wallFront())
+            self.data[self.mousePosition].setWallWest(API.wallRight())
+            if API.wallLeft() == True:
+                API.setWall((self.parseX(self.mousePosition)), (self.parseY(self.mousePosition)), "e")
+            if API.wallFront() == True:
+                API.setWall((self.parseX(self.mousePosition)), (self.parseY(self.mousePosition)), "s")
+            if API.wallRight() == True:
+                API.setWall((self.parseX(self.mousePosition)), (self.parseY(self.mousePosition)), "w")
+        if self.mouseDirection == "west":
+            self.data[self.mousePosition].setWallSouth(API.wallLeft())
+            self.data[self.mousePosition].setWallWest(API.wallFront())
+            self.data[self.mousePosition].setWallNorth(API.wallRight())
+            if API.wallLeft() == True:
+                API.setWall((self.parseX(self.mousePosition)), (self.parseY(self.mousePosition)), "s")
+            if API.wallFront() == True:
+                API.setWall((self.parseX(self.mousePosition)), (self.parseY(self.mousePosition)), "w")
+            if API.wallRight() == True:
+                API.setWall((self.parseX(self.mousePosition)), (self.parseY(self.mousePosition)), "n")
+
+    def mouseTurnLeft(self):
+        if self.mouseDirection == "north":
+            self.mouseDirection = "west"
+        elif self.mouseDirection == "east":
+            self.mouseDirection = "north"
+        elif self.mouseDirection == "south":
+            self.mouseDirection = "east"
+        elif self.mouseDirection == "west":
+            self.mouseDirection = "south"
+        else:
+            return
+
+        API.turnLeft()
+
+    def mouseTurnRight(self):
+        if self.mouseDirection == "north":
+            self.mouseDirection = "east"
+        elif self.mouseDirection == "east":
+            self.mouseDirection = "south"
+        elif self.mouseDirection == "south":
+            self.mouseDirection = "west"
+        elif self.mouseDirection == "west":
+            self.mouseDirection = "north"
+        else:
+            return
+        
+        API.turnRight()
+
+    def mouseTurnAround(self):
+        self.mouseTurnRight()
+        self.mouseTurnRight()
+
+        API.turnRight()
+        API.turnRight()
 
 
 
