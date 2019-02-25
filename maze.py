@@ -11,6 +11,7 @@
 import sys
 import API
 import cell
+import floodFillStack
 
 """ @brief  This class is a container class for the maze. It holds
     cell objects which are imported from cell.py
@@ -25,9 +26,9 @@ class Maze:
         @see loadPerimeter
     """
     def __init__(self):
-        self.data = []
-        for i in range(0,256):
-            self.data.append(cell.Cell())
+        self.data = [cell.Cell()] * 256
+        self.floodFillStack = floodFillStack.floodFillStack()
+
 
         self.mousePosition = 0
         self.mouseDirection = "north"
@@ -278,6 +279,41 @@ class Maze:
         API.turnRight()
         API.turnRight()
 
+    def colorCenter(self):
+        for i in range(7,9):
+            for j in range(7,9):
+                API.setColor(i, j, 'G')
+                API.setText(i, j, "0")
 
+    def floodFill(self):
+        """ As of writing this, I don't think we should do this
+            recursively. The wikipedia page only gives recursive 
+            examples, but their examples are different than what
+            we're doing anyway.
+
+            From https://www.youtube.com/watch?v=he3y_U7M8ng :
+            *   We need an empty stack to store cells
+            *   Whenever we discover a new wall, we push the current
+                cell into the stack and the adjacent cells to the 
+                new wall that we discovered
+                *   currCell <- pop the top of the stack
+                *   The distance of currCell should be the minimum 
+                    open neighbor distance + 1
+                *   If it is not, then set it to that value and push
+                    all open neighbors to the stack
+
+            *   This probably doesn't apply to a teensy specifically
+                but this is good information to know. When working on
+                embedded systems, recursion is bad because it wastes
+                memory. It is much more memory efficient to store 
+                recursive information on your own stack. It is also
+                bad to create this stack within the function. In memory,
+                all function data structures are put onto the "system
+                stack." On an embedded system, this stack is very memory
+                constrained, so it is better practice to make a global
+                variable to hold this stack, so that the rest of your
+                functions have enough memory on the system stack.
+        """
+        return
 
   

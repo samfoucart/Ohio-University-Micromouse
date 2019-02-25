@@ -17,6 +17,7 @@ def main():
     log("hello")
     OUMaze = maze.Maze()
     OUMaze.loadPerimiter()
+    OUMaze.colorCenter()
     while(True):
         OUMaze.mouseScanWalls()
         if API.wallLeft() == False:
