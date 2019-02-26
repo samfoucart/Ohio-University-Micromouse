@@ -282,6 +282,7 @@ class Maze:
         for i in range(7,9):
             for j in range(7,9):
                 API.setColor(i, j, 'G')
+                self.getCell(i,j).setFloodFillValue(0)
                 API.setText(i, j, "0")
 
     def floodFill(self, x, y):
@@ -325,7 +326,7 @@ class Maze:
             #API.setText(x,y, str((y*16)+x))
             if (self.getCell(x,y+1).getFloodFillValue() > self.getCell(x,y).getFloodFillValue()) or (self.getCell(x,y+1).getFloodFillValue() == -1):
                 self.getCell(x,y+1).setFloodFillValue(self.getCell(x,y).getFloodFillValue() + 1)
-                API.setText(x,y+1,str(self.getCell(x,y).getFloodFillValue() + 1))
+                API.setText(x,y + 1,str(self.getCell(x,y + 1).getFloodFillValue()))
                 self.floodFill(x, y + 1)
 
         return
