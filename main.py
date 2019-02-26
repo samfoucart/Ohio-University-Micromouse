@@ -23,6 +23,9 @@ def main():
     
     OUMaze.colorCenter()
     OUMaze.floodFill(7,8)
+    OUMaze.floodFill(8,8)
+    OUMaze.floodFill(7,7)
+    OUMaze.floodFill(8,7)
     
     while(True):
         OUMaze.mouseScanWalls()

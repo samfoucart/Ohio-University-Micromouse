@@ -320,6 +320,7 @@ class Maze:
         #   make adjacent cell value currentcellvalue + 1
         #   floodFill(adjacentCell);
 
+        
         # Look Up
         #API.setText(x,y+1, "hello")
         if self.getCell(x,y).getWallNorth() == False:
@@ -328,6 +329,30 @@ class Maze:
                 self.getCell(x,y+1).setFloodFillValue(self.getCell(x,y).getFloodFillValue() + 1)
                 API.setText(x,y + 1,str(self.getCell(x,y + 1).getFloodFillValue()))
                 self.floodFill(x, y + 1)
+        
+
+        # Look Right
+        if self.getCell(x,y).getWallEast() == False:
+            if self.getCell(x+1,y).getFloodFillValue() > self.getCell(x,y).getFloodFillValue() or self.getCell(x+1,y).getFloodFillValue() == -1:
+                self.getCell(x+1, y).setFloodFillValue(self.getCell(x,y).getFloodFillValue() + 1)
+                API.setText(x+1, y, str(self.getCell(x + 1, y).getFloodFillValue()))
+                self.floodFill(x + 1, y)
+        
+        
+        # Look Left
+        if self.getCell(x,y).getWallWest() == False:
+            if self.getCell(x - 1, y).getFloodFillValue() > self.getCell(x,y).getFloodFillValue() or self.getCell(x - 1,y).getFloodFillValue() == -1:
+                self.getCell(x - 1, y).setFloodFillValue(self.getCell(x,y).getFloodFillValue() + 1)
+                API.setText(x - 1, y, str(self.getCell(x - 1, y).getFloodFillValue()))
+                self.floodFill(x - 1, y)
+
+        # Look Down
+        if self.getCell(x,y).getWallSouth() == False:
+            if self.getCell(x, y - 1).getFloodFillValue() > self.getCell(x, y).getFloodFillValue() or self.getCell(x, y - 1).getFloodFillValue == -1:
+                self.getCell(x, y - 1).setFloodFillValue(self.getCell(x, y - 1).getFloodFillValue() + 1)
+                API.setText(x, y - 1, str(self.getCell(x, y - 1).getFloodFillValue()))
+                self.floodFill(x, y - 1)
+        
 
         return
                     
