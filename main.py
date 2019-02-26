@@ -16,8 +16,14 @@ def log(string):
 def main():
     log("hello")
     OUMaze = maze.Maze()
+    
     OUMaze.loadPerimiter()
+    #for value in range(0, 256):
+     #   API.setText(OUMaze.parseX(value),OUMaze.parseY(value),str(OUMaze.getCell(OUMaze.parseX(value),OUMaze.parseY(value)).getWallNorth()))
+    
     OUMaze.colorCenter()
+    OUMaze.floodFill(7,8)
+    
     while(True):
         OUMaze.mouseScanWalls()
         if API.wallLeft() == False:

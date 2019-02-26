@@ -26,7 +26,10 @@ class Maze:
         @see loadPerimeter
     """
     def __init__(self):
-        self.data = [cell.Cell()] * 256
+        self.data = []
+        for i in range(0,256):
+            self.data.append(cell.Cell())
+            
         self.floodFillStack = floodFillStack.floodFillStack()
 
 
@@ -36,7 +39,6 @@ class Maze:
 
     """ getUnparsedCoordinate This method returns a integer that can be parsed to 
         determine the x and y coordinates of a cell
-
         @param x this is the x coordinate of a cell
         @param y this is the y coordinate of a cell
         @return this is an the major row index of the 
@@ -47,7 +49,6 @@ class Maze:
 
     """ parseX This method converts the major row index of the 
         array into a X coordinate
-
         @param unParsedCoordinate This is the row major index
         of the one dimensional data array
         @return an integer value of the X coordinate
@@ -57,7 +58,6 @@ class Maze:
 
     """ parseY This method converts the major row index of the 
         array into a Y coordinate
-
         @param unParsedCoordinate This is the row major index
         of the one dimensional data array
         @return an integer value of the Y coordinate
@@ -67,7 +67,6 @@ class Maze:
 
     """ getCell This method returns a cell given
         the (x,y) coordinates
-
         @param x the X coordinate of the cell
         @param y the y coordinate of the cell
     """
@@ -285,12 +284,11 @@ class Maze:
                 API.setColor(i, j, 'G')
                 API.setText(i, j, "0")
 
-    def floodFill(self):
+    def floodFill(self, x, y):
         """ As of writing this, I don't think we should do this
             recursively. The wikipedia page only gives recursive 
             examples, but their examples are different than what
             we're doing anyway.
-
             From https://www.youtube.com/watch?v=he3y_U7M8ng :
             *   We need an empty stack to store cells
             *   Whenever we discover a new wall, we push the current
@@ -301,7 +299,6 @@ class Maze:
                     open neighbor distance + 1
                 *   If it is not, then set it to that value and push
                     all open neighbors to the stack
-
             *   This probably doesn't apply to a teensy specifically
                 but this is good information to know. When working on
                 embedded systems, recursion is bad because it wastes
@@ -314,6 +311,22 @@ class Maze:
                 variable to hold this stack, so that the rest of your
                 functions have enough memory on the system stack.
         """
-        return
+        #if self.floodFillStack.isEmpty() == False:
+        #    return
+        # if no wall in a certain direction, look at adjacent cell in that direction
+        # if adjacent cell flood fill value is <= current cell and not -1, do nothing
+        # if adjacent cell flood fill value is > current cell or is -1, 
+        #   make adjacent cell value currentcellvalue + 1
+        #   floodFill(adjacentCell);
 
-  
+        # Look Up
+        #API.setText(x,y+1, "hello")
+        if self.getCell(x,y).getWallNorth() == False:
+            #API.setText(x,y, str((y*16)+x))
+            if (self.getCell(x,y+1).getFloodFillValue() > self.getCell(x,y).getFloodFillValue()) or (self.getCell(x,y+1).getFloodFillValue() == -1):
+                self.getCell(x,y+1).setFloodFillValue(self.getCell(x,y).getFloodFillValue() + 1)
+                API.setText(x,y+1,str(self.getCell(x,y).getFloodFillValue() + 1))
+                self.floodFill(x, y + 1)
+
+        return
+                    

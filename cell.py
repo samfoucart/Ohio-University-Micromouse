@@ -43,7 +43,7 @@ class Cell:
         return self.hasWallEast
 
     def getWallSouth(self):
-        return self.hasWallEast
+        return self.hasWallSouth
 
     def getWallWest(self):
         return self.hasWallWest
@@ -82,7 +82,7 @@ class Cell:
         self.hasWallSouth = entry
 
     def setWallWest(self, entry):
-        self.hasWallEast = entry
+        self.hasWallWest = entry
 
     def setFloodFillValue(self, entry):
         self.floodFillValue = entry
