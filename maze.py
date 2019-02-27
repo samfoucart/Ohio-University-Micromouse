@@ -82,43 +82,20 @@ class Maze:
         for i in range(0,16):
             for j in range(0,16):
                 if i == 0:
-                    if j == 0:
-                        """ This calls the setWall functions from cell.py """
-                        self.data[(i*16)+j].setWallSouth(True)
-                        self.data[(i*16)+j].setWallWest(True)
-                        API.setWall(i, j, "s")
-                        API.setWall(i, j, "w")
-                    elif j == 15:
-                        self.data[(i*16)+j].setWallNorth(True)
-                        self.data[(i*16)+j].setWallWest(True)
-                        API.setWall(i, j, "n")
-                        API.setWall(i, j, "w")
-                    else:
-                        self.data[(i*16)+j].setWallWest(True)
-                        API.setWall(i, j, "w")
+                    self.data[self.getUnparsedCoordinate(j,i)].setWallSouth(True)
+                    API.setWall(j, i, "s")
                 
                 if i == 15:
-                    if j == 0:
-                        self.data[(i*16)+j].setWallSouth(True)
-                        self.data[(i*16)+j].setWallEast(True)
-                        API.setWall(i, j, "s")
-                        API.setWall(i, j, "e")
-                    elif j == 15:
-                        self.data[(i*16)+j].setWallNorth(True)
-                        self.data[(i*16)+j].setWallEast(True)
-                        API.setWall(i, j, "n")
-                        API.setWall(i, j, "e")
-                    else:
-                        self.data[(i*16)+j].setWallEast(True)
-                        API.setWall(i, j, "e")
+                    self.data[self.getUnparsedCoordinate(j, i)].setWallNorth(True)
+                    API.setWall(j, i, "n")
 
-                if j == 0 and (i != 0 or i != 15):
-                    self.data[(i*16)+j].setWallSouth(True)
-                    API.setWall(i, j, "s")
+                if j == 0:
+                    self.data[self.getUnparsedCoordinate(j, i)].setWallWest(True)
+                    API.setWall(j, i, "w")
 
-                if j == 15 and (i != 0 or i != 15):
-                    self.data[(i*16)+j].setWallNorth(True)
-                    API.setWall(i, j, "n")
+                if j == 15:
+                    self.data[self.getUnparsedCoordinate(j, i)].setWallEast(True)
+                    API.setWall(j, i, "e")
 
     """ This function moves the mouse forward and assumes
         that the mouse has already scanned for walls.

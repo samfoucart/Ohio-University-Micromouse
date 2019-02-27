@@ -7,7 +7,8 @@ MAXSIZE = 512
 class floodFillStack:
     def __init__(self):
         self.top = -1
-        self.memory = [cell.Cell()] * MAXSIZE
+        for i in range(0,512):
+            self.memory = [cell.Cell()]
 
     def push(self, currentCell):
         if self.top >= MAXSIZE - 1:
