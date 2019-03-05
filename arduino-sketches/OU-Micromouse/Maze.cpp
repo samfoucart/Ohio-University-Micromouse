@@ -1,12 +1,24 @@
 #include "Maze.h"
-#include <iostream>
-#include <iomanip>
+#include "arduino.h"
+/*
+Maze::Maze()
+{
+  for (Cell::byte i = 0; i < 16; ++i)
+  {
+    for (Cell::byte j = 0; j < 16; ++j)
+    {
+      data[i][j] = Cell();
+    }
+  }
+}
+*/
+
 
 Maze::Maze()
 {
-    for(int i = 0; i < 16; ++i)
+    for (Cell::byte i = 0; i < 16; ++i)
     {
-        for(int j = 0; j < 16; ++j)
+        for (Cell::byte j = 0; j < 16; ++j)
         {
             Cell * cellPtr;
             cellPtr = new Cell;
@@ -20,9 +32,9 @@ Maze::Maze()
 
 Maze::~Maze()
 {
-    for(int i = 0; i < 16; ++i)
+    for (Cell::byte i = 0; i < 16; ++i)
     {
-        for(int j = 0; j < 16; ++j)
+        for (Cell::byte j = 0; j < 16; ++j)
         {
             delete data[i][j];
             data[i][j] = nullptr;
@@ -30,11 +42,12 @@ Maze::~Maze()
     }
 }
 
+
 void Maze::initializePerimiter()
 {
-    for(int i = 0; i < 16; ++i)
+    for (Cell::byte i = 0; i < 16; ++i)
     {
-        for(int j = 0; j < 16; ++j)
+        for(Cell::byte j = 0; j < 16; ++j)
         {
             if (i == 0)
                 data[i][j]->setWallSouth(true);
@@ -54,9 +67,9 @@ void Maze::initializePerimiter()
 
 void Maze::initializeCenter()
 {
-    for (int i = 0; i < 16; ++i)
+    for (Cell::byte i = 0; i < 16; ++i)
     {
-        for (int j = 0; j < 16; ++j)
+        for (Cell::byte j = 0; j < 16; ++j)
         {
             data[i][j]->setFloodFillValue(-1);
             if ((i == 7 || i == 8) && (j == 7 || j == 8))
@@ -68,30 +81,32 @@ void Maze::initializeCenter()
 
 void Maze::printFlood()
 {
-    for (int i = 0; i < 16; ++i)
+    for (Cell::byte i = 0; i < 16; ++i)
     {
-        std::cout << "----";
+        Serial.print("----");
     }
-    std::cout << std::endl;
+    Serial.print('\n');
 
-    for (int i = 15; i >= 0; --i)
+    for (Cell::byte i = 15; i >= 0; --i)
     {
-        for (int j = 0; j < 16; ++j)
+        for (Cell::byte j = 0; j < 16; ++j)
         {
             if (j == 0)
-                std::cout << '|';
+                Serial.print('|');
 
-            std::cout << std::left << std::setw(4) << data[i][j]->getFloodFillValue() << '|';
+            Serial.print("    ");
+            Serial.print(data[i][j]->getFloodFillValue());
+            Serial.print('|');
             if (j == 15)
-                std::cout << std::endl;
+                Serial.print('\n');
         }
     }
 
-    for (int i = 0; i < 16; ++i)
+    for (Cell::byte i = 0; i < 16; ++i)
     {
-        std::cout << "--";
+        Serial.print("----");
     }
-    std::cout << std::endl;
+    Serial.print('\n');
 }
 
 void Maze::floodFill(int x, int y)
@@ -136,6 +151,11 @@ void Maze::floodFill(int x, int y)
         }
     }
 
+    Serial.print('(');
+    Serial.print(x);
+    Serial.print(", ");
+    Serial.print(y);
+    Serial.print(")\n");
     return;
 }
 

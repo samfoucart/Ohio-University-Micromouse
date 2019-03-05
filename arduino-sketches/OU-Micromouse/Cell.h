@@ -12,6 +12,8 @@
 class Cell
 {
 public:
+    typedef unsigned char byte;
+    
     Cell()
     {
         hasWallNorth = false;
@@ -29,7 +31,7 @@ public:
     bool getWallWest(){return hasWallWest;}
     bool getBeenVisited(){return hasBeenVisited;}
     bool getBeenFilled(){return hasBeenFilled;}
-    int getFloodFillValue(){return floodFillValue;}
+    byte getFloodFillValue(){return floodFillValue;}
 
     void setWallNorth(bool entry){hasWallNorth = entry;}
     void setWallEast(bool entry){hasWallEast = entry;}
@@ -47,7 +49,7 @@ private:
     bool hasWallWest;
     bool hasBeenVisited;
     bool hasBeenFilled;
-    int floodFillValue;
+    byte floodFillValue;
 };
 
 
