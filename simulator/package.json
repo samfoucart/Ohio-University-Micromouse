@@ -1,0 +1,23 @@
+{
+  "name": "micromouse-simulator",
+  "version": "1.0.0",
+  "description": "Ohio University Micromouse Simulator",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samfoucart/Ohio-University-Micromouse.git"
+  },
+  "author": "Ohio University IEEE",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/samfoucart/Ohio-University-Micromouse/issues"
+  },
+  "homepage": "https://github.com/samfoucart/Ohio-University-Micromouse#readme",
+  "devDependencies": {
+    "electron": "^5.0.5"
+  }
+}
