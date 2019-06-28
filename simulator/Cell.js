@@ -3,7 +3,7 @@ function Cell(row, collumn, wallUp = false, wallRight = false, wallDown = false,
     // 0x0 would be top left cell, while 16x16 is bottom right
     this.xPosition = row
     this.yPosition = collumn
-    console.log("Loading: (", this.xPosition, ", ", this.yPosition, ")")
+    //console.log("Loading: (", this.xPosition, ", ", this.yPosition, ")")
 
     // Wall Booleans
     this.wallLeft = wallLeft
@@ -54,6 +54,7 @@ function Cell(row, collumn, wallUp = false, wallRight = false, wallDown = false,
     // Render
     this.render = () => {
         //this.scale = windowHeight
+        push()
         fill(this.color)
         noStroke()
         rect((this.xPosition * this.scale) + this.margin, (this.yPosition * this.scale) + this.margin, this.scale, this.scale)
@@ -99,6 +100,7 @@ function Cell(row, collumn, wallUp = false, wallRight = false, wallDown = false,
             vertex((this.xPosition * this.scale) + this.margin, (this.yPosition * this.scale) + this.margin)
         }
         endShape()
+        pop()
     }
 
     

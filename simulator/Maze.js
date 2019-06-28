@@ -22,4 +22,12 @@ function Maze() {
             this.cellContainer[i].render()
         }
     }
+
+    this.getCoordinatesFromIndex = (index) => {
+        return [index % 16, (index - (index % 16)) / 16]
+    }
+
+    this.getCell = (row, collumn) => {
+        return this.cellContainer[(row * 16) + collumn]
+    }
 }
