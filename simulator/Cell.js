@@ -29,7 +29,7 @@ function Cell(row, collumn, wallUp = false, wallRight = false, wallDown = false,
     }
 
     // Getters and Setters
-    this.setWallLeft = function(wallLeft) {
+    this.setWallLeft = (wallLeft) => {
         this.wallLeft = wallLeft
     }
 

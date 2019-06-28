@@ -1,6 +1,7 @@
 var sizeUnit
 var maze
 var mouse
+var playing = false
 
 
 
@@ -8,6 +9,10 @@ function setup() {
     createCanvas(windowWidth - (windowWidth / 32), windowHeight - (windowWidth / 32))
     maze = new Maze()
     mouse = new Mouse()
+    maze.floodFill(7, 8)
+    maze.floodFill(7, 7)
+    maze.floodFill(8, 7)
+    maze.floodFill(8, 8)
 
 }
 
@@ -15,6 +20,13 @@ function draw() {
 
     maze.render()
     mouse.render()
+    if (playing) {
+        if (maze.turnTowardsBest(mouse)) {
+            mouse.render()
+            mouse.moveForward(maze.getCell(mouse.getRow(), mouse.getCollumn()))
+            mouse.render()
+        } 
+    }
     
 }
 
@@ -31,7 +43,7 @@ function keyPressed() {
             mouse.turnLeft()
             break
         case UP_ARROW:
-            mouse.moveForward(maze.getCell(mouse.getRow(), mouse.getCollumn()))
+            playing = true
             break
         default:
             break

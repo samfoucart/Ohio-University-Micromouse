@@ -63,5 +63,9 @@ function Mouse() {
         return this.collumn
     }
 
+    this.getDirection = () => {
+        return this.direction
+    }
+
 
 }
