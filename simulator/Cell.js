@@ -18,6 +18,16 @@ function Cell(row, collumn, wallUp = false, wallRight = false, wallDown = false,
     this.margin = screen.width * .01
     this.scale = screen.height * .04
 
+    this.floodFillValue = -1
+
+    this.getValue = () => {
+        return this.floodFillValue
+    }
+
+    this.setValue = (value) => {
+        this.floodFillValue = value
+    }
+
     // Getters and Setters
     this.setWallLeft = function(wallLeft) {
         this.wallLeft = wallLeft
@@ -100,6 +110,11 @@ function Cell(row, collumn, wallUp = false, wallRight = false, wallDown = false,
             vertex((this.xPosition * this.scale) + this.margin, (this.yPosition * this.scale) + this.margin)
         }
         endShape()
+
+        fill(0, 0, 0)
+        text(this.floodFillValue, (this.xPosition * this.scale) + this.margin + (this.scale / 2), (this.yPosition * this.scale) + this.margin + (this.scale / 2))
+        textAlign(CENTER)
+        
         pop()
     }
 

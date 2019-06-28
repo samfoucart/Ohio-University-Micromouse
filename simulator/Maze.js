@@ -17,6 +17,11 @@ function Maze() {
         this.cellContainer[j + 240].setWallDown(true)
     }
 
+    this.cellContainer[119].setValue(0)
+    this.cellContainer[120].setValue(0)
+    this.cellContainer[135].setValue(0)
+    this.cellContainer[136].setValue(0)
+
     this.render = () => {
         for (var i = 0; i < 256; i++) {
             this.cellContainer[i].render()
@@ -29,5 +34,17 @@ function Maze() {
 
     this.getCell = (row, collumn) => {
         return this.cellContainer[(row * 16) + collumn]
+    }
+
+    this.floodFill = (row, collumn) => {
+        stack = new FloodFillStack()
+        value = 0
+        cell = this.cellContainer[(row * 16) + collumn].getCell()
+        cell.setFloodFillValue(value)
+        stack.push(row, collumn, value)
+        while (!stack.isEmpty()) {
+            [row, collumn, value] = stack.pop()
+            this.getCell
+        }
     }
 }
