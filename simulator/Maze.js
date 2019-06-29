@@ -96,7 +96,7 @@ function Maze() {
         currentValue = cell.getValue()
         values = []
 
-        if(!cell.getWallRight()) {
+        if (!cell.getWallRight()) {
             other = this.cellContainer[(row * 16) + collumn + 1].getValue()
             if (other < currentValue && other !== -1) {
                 values.push(other)
@@ -107,7 +107,7 @@ function Maze() {
             values.push(255)
         }
 
-        if(!cell.getWallDown()) {
+        if (!cell.getWallDown()) {
             other = this.cellContainer[((row + 1) * 16) + collumn].getValue()
             if (other < currentValue && other !== -1) {
                 values.push(other)
@@ -118,7 +118,7 @@ function Maze() {
             values.push(255)
         }
 
-        if(!cell.getWallLeft()) {
+        if (!cell.getWallLeft()) {
             other = this.cellContainer[(row * 16) + collumn - 1].getValue()
             if (other < currentValue && other !== -1) {
                 values.push(other)
@@ -129,7 +129,7 @@ function Maze() {
             values.push(255)
         }
 
-        if(!cell.getWallUp()) {
+        if (!cell.getWallUp()) {
             other = this.cellContainer[((row - 1) * 16) + collumn].getValue()
             if (other < currentValue && other !== -1) {
                 values.push(other)
@@ -145,8 +145,8 @@ function Maze() {
         lowestNeighbor = 255
         for (var i = 0; i < 4; i++) {
             if (lowestNeighbor > values[(direction + i) % 4]){
-                bestDir = (bestDir + i) % 4
-                lowestNeighbor = values[(bestDir + i) % 4]
+                bestDir = (direction + i) % 4
+                lowestNeighbor = values[(direction + i) % 4]
             }
         }
         if (lowestNeighbor === 255) {

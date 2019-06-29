@@ -6,6 +6,7 @@ var playing = false
 
 
 function setup() {
+    frameRate(5)
     createCanvas(windowWidth - (windowWidth / 32), windowHeight - (windowWidth / 32))
     maze = new Maze()
     mouse = new Mouse()
