@@ -18,6 +18,6 @@
   },
   "homepage": "https://github.com/samfoucart/Ohio-University-Micromouse#readme",
   "devDependencies": {
-    "electron": "^5.0.5"
+    "electron": "^13.6.6"
   }
 }
